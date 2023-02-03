@@ -1,0 +1,2 @@
+1- initialise queue : -
+    php artisan queue:table
