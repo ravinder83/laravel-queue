@@ -1,2 +1,21 @@
 1- initialise queue : -
-    php artisan queue:table
+    - php artisan queue:table
+    - php artisan migrate
+
+2- create a job :-
+    - php artisan make:job SendEmailJob
+
+3- Now in SendEmailJob.php file
+    public function handle()
+    {
+        //created job for sending mail
+        Mail::to('sspl.himanshu.intern@gmail.com')->send(new SendEmailMailable());
+    }
+
+4- After that dispatch job
+    $job = (new SendEmailJob())->delay(Carbon::now()->addSeconds(5));
+    dispatch($job);
+
+5- set Queue_Connection=database
+6- To listen all the job write the following command
+    php artisan queue:work
